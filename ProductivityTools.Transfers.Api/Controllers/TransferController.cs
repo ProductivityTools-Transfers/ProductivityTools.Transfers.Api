@@ -4,9 +4,20 @@ namespace ProductivityTools.Transfers.Api.Controllers
 {
     public class TransferController : Controller
     {
-        public IActionResult Index()
+        [HttpGet]
+        [Route("echo")]
+        public string echo(object name)
         {
-            return View();
+            return $"Welcome {name.ToString()}";
         }
+
+        [HttpPost]
+        [Route("List")]
+        public string List(object name)
+        {
+            return "fsda";
     }
+    }
+
+
 }

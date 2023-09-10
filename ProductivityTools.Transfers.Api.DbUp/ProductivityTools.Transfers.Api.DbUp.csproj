@@ -7,4 +7,18 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Scripts\00001.Dabase.sql" />
+    <None Remove="Scripts\00002.UniqueColumns.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Scripts\00001.Dabase.sql" />
+    <EmbeddedResource Include="Scripts\00002.UniqueColumns.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="dbup-sqlserver" Version="5.0.8" />
+  </ItemGroup>
+
 </Project>
