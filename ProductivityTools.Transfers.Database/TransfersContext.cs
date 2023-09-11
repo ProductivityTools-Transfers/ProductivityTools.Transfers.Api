@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace ProductivityTools.Transfers.Database
 {
-    internal class TransfersContext : DbContext
+    public class TransfersContext : DbContext
     {
 
         private readonly IConfiguration configuration;
