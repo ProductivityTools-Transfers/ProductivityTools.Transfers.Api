@@ -9,7 +9,7 @@ namespace ProductivityTools.Transfers.Database.Objects
     public class Transfer
     {
         public int TransferId { get; set; }
-        public DateOnly Date { get; set; }
+        public DateTime Date { get; set; }
         public string Category { get; set; }
         public string Name { get; set; }
         public decimal Value { get; set; }

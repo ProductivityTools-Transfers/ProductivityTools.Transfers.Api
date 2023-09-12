@@ -1,8 +1,11 @@
+using ProductivityTools.Transfers.Database;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
+builder.Services.ConfigureServicesDatabase();
 
 var app = builder.Build();
 

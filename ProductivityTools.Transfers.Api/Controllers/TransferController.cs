@@ -17,9 +17,9 @@ namespace ProductivityTools.Transfers.Api.Controllers
 
         [HttpGet]
         [Route("echo")]
-        public string echo(object name)
+        public string echo(string name)
         {
-            return $"Welcome {name.ToString()}";
+            return $"Welcome {name}";
         }
 
         [HttpPost]
@@ -32,7 +32,7 @@ namespace ProductivityTools.Transfers.Api.Controllers
         }
 
         [HttpPost]
-        [Route("List")]
+        [Route("Add")]
         public StatusCodeResult Add(Transfer transfer)
         {
             this.TransfersContext.Add(transfer);
