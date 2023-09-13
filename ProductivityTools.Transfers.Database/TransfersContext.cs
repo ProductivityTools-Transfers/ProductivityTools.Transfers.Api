@@ -36,7 +36,7 @@ namespace ProductivityTools.Transfers.Database
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer(configuration.GetConnectionString("PTJournal"));
+                optionsBuilder.UseSqlServer(configuration.GetConnectionString("PTTransfers"));
                // optionsBuilder.UseLoggerFactory(GetLoggerFactory());
                 optionsBuilder.EnableSensitiveDataLogging();
                 base.OnConfiguring(optionsBuilder);
