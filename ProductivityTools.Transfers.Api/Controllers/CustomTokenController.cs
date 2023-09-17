@@ -3,6 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ProductivityTools.Transfers.WebApi.Controllers
 {
+
+    [ApiController]
+    [Route("[controller]")]
     public class CustomTokenController : Controller
     {
         [HttpGet]
