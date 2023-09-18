@@ -14,6 +14,7 @@ FirebaseApp.Create(new AppOptions()
 {
     Credential = GoogleCredential.FromFile($"{masterconfpath}\\ProductivityTools.Transfers.ServiceAccount.json"),
 });
+IdentityModelEventSource.ShowPII = true;
 builder.Services
  .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
  .AddJwtBearer(options =>
@@ -29,9 +30,9 @@ builder.Services
      };
  });
 
-IdentityModelEventSource.ShowPII = true;
 
 
+app.UseAuthorization();
 
 builder.Services.AddControllers();
 builder.Services.ConfigureServicesDatabase();
@@ -42,7 +43,7 @@ var app = builder.Build();
 
 app.UseHttpsRedirection();
 
-app.UseAuthorization();
+
 
 app.MapControllers();
 

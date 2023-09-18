@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using ProductivityTools.Transfers.Database;
 using ProductivityTools.Transfers.Database.Objects;
 
@@ -33,6 +34,7 @@ namespace ProductivityTools.Transfers.Api.Controllers
 
         [HttpPost]
         [Route("Add")]
+        [Authorize]
         public StatusCodeResult Add(Transfer transfer)
         {
             var recordWithTheSameDateExists = this.TransfersContext.Transfers.FirstOrDefault(x => x.Date == transfer.Date);
