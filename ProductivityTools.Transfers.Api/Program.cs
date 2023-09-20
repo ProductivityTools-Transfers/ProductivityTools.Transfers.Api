@@ -32,7 +32,7 @@ builder.Services
 
 
 
-app.UseAuthorization();
+
 
 builder.Services.AddControllers();
 builder.Services.ConfigureServicesDatabase();
@@ -42,8 +42,8 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 
 app.UseHttpsRedirection();
-
-
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.MapControllers();
 
