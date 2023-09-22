@@ -37,7 +37,7 @@ namespace ProductivityTools.Transfers.Api.Controllers
         [Authorize]
         public StatusCodeResult Add(Transfer transfer)
         {
-            var recordWithTheSameDateExists = this.TransfersContext.Transfers.FirstOrDefault(x => x.Date == transfer.Date);
+            var recordWithTheSameDateExists = this.TransfersContext.Transfers.FirstOrDefault(x => x.Date == transfer.Date && x.Category==transfer.Category && x.Name==transfer.Name);
             if (recordWithTheSameDateExists != null)
             {
                 this.TransfersContext.Transfers.Remove(recordWithTheSameDateExists);
