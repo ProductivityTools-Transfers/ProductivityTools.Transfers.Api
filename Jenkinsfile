@@ -34,7 +34,7 @@ pipeline {
         }
         stage('copyDbMigratdorFiles') {
             steps {
-                bat('xcopy "ProductivityTools.Transfers.Api.DbUp\\bin\\Release\\net6.0\\publish" "C:\\Bin\\JournalApiDdbMigration\\" /O /X /E /H /K')
+                bat('xcopy "ProductivityTools.Transfers.Api.DbUp\\bin\\Release\\net6.0\\publish" "C:\\Bin\\TransfersApiDdbMigration\\" /O /X /E /H /K')
             }
         }
 
