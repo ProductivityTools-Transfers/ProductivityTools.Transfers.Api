@@ -60,13 +60,13 @@ pipeline {
         }
         stage('copyIisFiles') {
             steps {         
-                bat('xcopy "src\\Server\\ProductivityTools.Journal.WebApi\\bin\\Release\\net6.0\\publish" "C:\\Bin\\Journal\\" /O /X /E /H /K')
+                bat('xcopy "ProductivityTools.Transfers.Api\\bin\\Release\\net6.0\\publish" "C:\\Bin\\IIS\\Transfers\\" /O /X /E /H /K')
             }
         }
 
         stage('startMeetingsOnIis') {
             steps {
-                bat('%windir%\\system32\\inetsrv\\appcmd start site /site.name:Journal')
+                bat('%windir%\\system32\\inetsrv\\appcmd start site /site.name:Transfers')
             }
         }
         stage('byebye') {
