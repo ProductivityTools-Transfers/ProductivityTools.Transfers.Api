@@ -18,42 +18,42 @@ pipeline {
         stage('clone') {
             steps {
                 // Get some code from a GitHub repository
-                git branch: 'master',
-                url: 'https://github.com/ProductivityTools-Journal/ProductivityTools.Journal.Api'
+                git branch: 'main',
+                url: 'https://github.com/ProductivityTools-Transfers/ProductivityTools.Transfers.Api'
             }
         }
         stage('build') {
             steps {
-                bat(script: "dotnet publish ProductivityTools.Journal.Api.sln -c Release ", returnStdout: true)
+                bat(script: "dotnet publish ProductivityTools.Transfers.Api.sln -c Release ", returnStdout: true)
             }
         }
         stage('deleteDbMigratorDir') {
             steps {
-                bat('if exist "C:\\Bin\\JournalApiDdbMigration" RMDIR /Q/S "C:\\Bin\\JournalApiDdbMigration"')
+                bat('if exist "C:\\Bin\\TransfersApiDdbMigration" RMDIR /Q/S "C:\\Bin\\TransfersApiDdbMigration"')
             }
         }
         stage('copyDbMigratdorFiles') {
             steps {
-                bat('xcopy "src\\Server\\ProductivityTools.Journal.DbUp\\bin\\Release\\net6.0\\publish" "C:\\Bin\\JournalApiDdbMigration\\" /O /X /E /H /K')
+                bat('xcopy "ProductivityTools.Transfers.Api.DbUp\\bin\\Release\\net6.0\\publish" "C:\\Bin\\JournalApiDdbMigration\\" /O /X /E /H /K')
             }
         }
 
         stage('runDbMigratorFiles') {
             steps {
-                bat('C:\\Bin\\JournalApiDdbMigration\\ProductivityTools.Journal.DbUp.exe')
+                bat('C:\\Bin\\TransfersApiDdbMigration\\ProductivityTools.Transfers.Api.DbUp.exe')
             }
         }
 
         stage('stopMeetingsOnIis') {
             steps {
-                bat('%windir%\\system32\\inetsrv\\appcmd stop site /site.name:journal')
+                bat('%windir%\\system32\\inetsrv\\appcmd stop site /site.name:Transfers')
             }
         }
 
         stage('deleteIisDir') {
             steps {
                 retry(5) {
-                    bat('if exist "C:\\Bin\\Journal" RMDIR /Q/S "C:\\Bin\\Journal"')
+                    bat('if exist "C:\\Bin\\IIS\\Transfers" RMDIR /Q/S "C:\\Bin\\IIS\\Transfers"')
                 }
 
             }
