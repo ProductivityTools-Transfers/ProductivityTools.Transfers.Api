@@ -3,8 +3,9 @@ using Google.Apis.Auth.OAuth2;
 using Microsoft.IdentityModel.Logging;
 using ProductivityTools.Transfers.Database;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens; 
+using Microsoft.IdentityModel.Tokens;
 
+string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -30,7 +31,14 @@ builder.Services
      };
  });
 
-
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(MyAllowSpecificOrigins,
+    builder =>
+    {
+        builder.WithOrigins("http://localhost:3000", "https://meetingsweb.z13.web.core.windows.net").AllowAnyMethod().AllowAnyHeader();
+    });
+});
 
 
 
@@ -38,10 +46,10 @@ builder.Services.AddControllers();
 builder.Services.ConfigureServicesDatabase();
 
 var app = builder.Build();
-
-// Configure the HTTP request pipeline.
-
+app.UseRouting();
+app.UseCors(MyAllowSpecificOrigins);
 app.UseHttpsRedirection();
+
 app.UseAuthentication();
 app.UseAuthorization();
 
