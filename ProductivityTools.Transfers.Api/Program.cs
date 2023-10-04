@@ -36,7 +36,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy(MyAllowSpecificOrigins,
     builder =>
     {
-        builder.WithOrigins("http://localhost:3000", "https://meetingsweb.z13.web.core.windows.net").AllowAnyMethod().AllowAnyHeader();
+        builder.WithOrigins("http://localhost:3000", "https://localhost:3000", "https://meetingsweb.z13.web.core.windows.net").AllowAnyMethod().AllowAnyHeader();
     });
 });
 
@@ -46,7 +46,7 @@ builder.Services.AddControllers();
 builder.Services.ConfigureServicesDatabase();
 
 var app = builder.Build();
-app.UseRouting();
+
 app.UseCors(MyAllowSpecificOrigins);
 app.UseHttpsRedirection();
 

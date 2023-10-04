@@ -22,13 +22,16 @@ namespace ProductivityTools.Transfers.Api.Controllers
         {
             return $"Welcome {name}";
         }
-
+        public class x
+        {
+            string Name { get; set; }
+        }
         [HttpPost]
         [Route("List")]
-        public IEnumerable<Transfer> List(object name)
+        public IEnumerable<Transfer> List(x ob)
         {
             var lastElement = this.TransfersContext.Transfers.OrderBy(x => x.Date).Single();
-            var list = this.TransfersContext.Transfers.Where(x => x.Name == name.ToString() && x.Date == lastElement.Date);
+            var list = this.TransfersContext.Transfers.Where(x => x.Name == x.Name.ToString() && x.Date == lastElement.Date);
             return list;
         }
 
