@@ -15,7 +15,7 @@ namespace ProductivityTools.Transfers.Database
     {
 
         private readonly IConfiguration configuration;
-        public DbSet<Transfer> Transfers { get; set; }
+        public DbSet<TransferHistory> Transfers { get; set; }
 
         public TransfersContext(IConfiguration configuration)
         {
@@ -45,7 +45,7 @@ namespace ProductivityTools.Transfers.Database
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Transfer>().ToTable("Transfer");
+            modelBuilder.Entity<TransferHistory>().ToTable("Transfer");
 
             base.OnModelCreating(modelBuilder);
         }

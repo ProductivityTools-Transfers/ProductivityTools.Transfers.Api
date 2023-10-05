@@ -7,11 +7,11 @@ namespace ProductivityTools.Transfers.Api.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class TransferController : Controller
+    public class TransferHistoryController : Controller
     {
         TransfersContext TransfersContext;
 
-        public TransferController(TransfersContext transfersContext)
+        public TransferHistoryController(TransfersContext transfersContext)
         {
             this.TransfersContext = transfersContext;
         }

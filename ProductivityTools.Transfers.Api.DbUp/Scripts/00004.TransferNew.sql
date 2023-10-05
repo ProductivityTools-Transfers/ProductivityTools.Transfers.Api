@@ -10,6 +10,7 @@ CREATE TABLE [dbo].[Trasfer](
 	[SourceId] INT,
 	[TransferDay] INT,
 	[Value] DECIMAL(7,2),
-	[TargetId] INT
+	[TargetId] INT,
+	CONSTRAINT [PK_Transfer] PRIMARY KEY ([TransferId])
 	)
 
