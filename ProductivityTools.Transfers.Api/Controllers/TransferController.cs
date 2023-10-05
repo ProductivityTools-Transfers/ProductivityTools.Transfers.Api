@@ -26,35 +26,24 @@ namespace ProductivityTools.Transfers.Api.Controllers
         {
             string Name { get; set; }
         }
+
         [HttpPost]
         [Route("List")]
-        public IEnumerable<TransferHistory> List(x ob)
+        public IEnumerable<Transfer> List(x ob)
         {
-            var lastElement = this.TransfersContext.Transfers.OrderBy(x => x.Date).Single();
-            var list = this.TransfersContext.Transfers.Where(x => x.Name == x.Name.ToString() && x.Date == lastElement.Date);
-            return list;
+            var lastElement = this.TransfersContext.Transfers.ToList();
+            return lastElement;
         }
 
 
         [HttpPost]
         [Route("Add")]
         [Authorize]
-        public StatusCodeResult Add(TransferHistory transfer)
+        public StatusCodeResult Add(Transfer transfer)
         {
-            var recordWithTheSameDateExists = this.TransfersContext.Transfers.FirstOrDefault(x => x.Date == transfer.Date && x.Category==transfer.Category && x.Name==transfer.Name);
-            if (recordWithTheSameDateExists != null)
-            {
-                this.TransfersContext.Transfers.Remove(recordWithTheSameDateExists);
-                this.TransfersContext.SaveChanges();
-            }
-            this.TransfersContext.Add(transfer);
+            this.TransfersContext.Transfers.Add(transfer);
             this.TransfersContext.SaveChanges();
-
             return Ok();
         }
-
-
     }
-
-
 }

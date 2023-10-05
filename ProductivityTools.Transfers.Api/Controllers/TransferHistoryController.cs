@@ -30,8 +30,8 @@ namespace ProductivityTools.Transfers.Api.Controllers
         [Route("List")]
         public IEnumerable<TransferHistory> List(x ob)
         {
-            var lastElement = this.TransfersContext.Transfers.OrderBy(x => x.Date).Single();
-            var list = this.TransfersContext.Transfers.Where(x => x.Name == x.Name.ToString() && x.Date == lastElement.Date);
+            var lastElement = this.TransfersContext.TransfersHistory.OrderBy(x => x.Date).Single();
+            var list = this.TransfersContext.TransfersHistory.Where(x => x.Name == x.Name.ToString() && x.Date == lastElement.Date);
             return list;
         }
 
@@ -40,10 +40,10 @@ namespace ProductivityTools.Transfers.Api.Controllers
         [Authorize]
         public StatusCodeResult Add(TransferHistory transfer)
         {
-            var recordWithTheSameDateExists = this.TransfersContext.Transfers.FirstOrDefault(x => x.Date == transfer.Date && x.Category==transfer.Category && x.Name==transfer.Name);
+            var recordWithTheSameDateExists = this.TransfersContext.TransfersHistory.FirstOrDefault(x => x.Date == transfer.Date && x.Category==transfer.Category && x.Name==transfer.Name);
             if (recordWithTheSameDateExists != null)
             {
-                this.TransfersContext.Transfers.Remove(recordWithTheSameDateExists);
+                this.TransfersContext.TransfersHistory.Remove(recordWithTheSameDateExists);
                 this.TransfersContext.SaveChanges();
             }
             this.TransfersContext.Add(transfer);

@@ -2,10 +2,12 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Logging;
 using ProductivityTools.Transfers.Database.Objects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,7 +17,10 @@ namespace ProductivityTools.Transfers.Database
     {
 
         private readonly IConfiguration configuration;
-        public DbSet<TransferHistory> Transfers { get; set; }
+        
+        public DbSet<Transfer> Transfers { get; set; }
+        public DbSet<TransferHistory> TransfersHistory { get; set; }
+        public DbSet<Account> Accounts { get; set; }
 
         public TransfersContext(IConfiguration configuration)
         {
@@ -45,8 +50,12 @@ namespace ProductivityTools.Transfers.Database
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<TransferHistory>().ToTable("Transfer");
-
+            modelBuilder.Entity<Transfer>().ToTable("Transfer")
+                .HasKey(x => x.TransferId);
+            modelBuilder.Entity<TransferHistory>().ToTable("TransferHistory")
+                .HasKey(x=>x.TransferHistoryId);
+            modelBuilder.Entity<Account>().ToTable("Account")
+                .HasKey(x => x.AccountId);
             base.OnModelCreating(modelBuilder);
         }
 
