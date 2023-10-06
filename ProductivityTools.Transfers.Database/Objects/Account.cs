@@ -10,5 +10,7 @@ namespace ProductivityTools.Transfers.Database.Objects
     {
         public int AccountId { get; set; }
         public string Name { get; set; }
+
+        public List<Transfer> Transfers { get; set; }
     }
 }

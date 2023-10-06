@@ -15,10 +15,12 @@ CREATE TABLE [dbo].[Transfer](
 	CONSTRAINT [PK_Transfer] PRIMARY KEY ([TransferId])
 	)
 
-ALTER TABLE [dbo].[Trasnfer]  WITH CHECK ADD  CONSTRAINT [FK_Transfer_TransferHistory] FOREIGN KEY([SourceId])
+Go
+
+ALTER TABLE [dbo].[Transfer]  WITH CHECK ADD  CONSTRAINT [FK_Transfer_TransferHistory_Source] FOREIGN KEY([SourceId])
 REFERENCES [dbo].Account(AccountId)
 GO
 
-ALTER TABLE [dbo].[Trasnfer]  WITH CHECK ADD  CONSTRAINT [FK_Transfer_TransferHistory] FOREIGN KEY([TargetId])
+ALTER TABLE [dbo].[Transfer]  WITH CHECK ADD  CONSTRAINT [FK_Transfer_TransferHistory_Target] FOREIGN KEY([TargetId])
 REFERENCES [dbo].Account(AccountId)
 GO

@@ -10,14 +10,14 @@
   <ItemGroup>
     <None Remove="Scripts\00001.Dabase.sql" />
     <None Remove="Scripts\00002.UniqueColumns.sql" />
-    <None Remove="Scripts\00003.TransferHistory.sql" />
+    <None Remove="Scripts\00003.TransferHistory2.sql" />
     <None Remove="Scripts\00004.TransferNew.sql" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="Scripts\00001.Dabase.sql" />
     <EmbeddedResource Include="Scripts\00004.TransferNew.sql" />
-    <EmbeddedResource Include="Scripts\00003.TransferHistory.sql" />
+    <EmbeddedResource Include="Scripts\00003.TransferHistory2.sql" />
     <EmbeddedResource Include="Scripts\00002.UniqueColumns.sql" />
   </ItemGroup>
 
