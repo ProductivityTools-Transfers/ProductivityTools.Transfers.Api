@@ -27,7 +27,6 @@ namespace ProductivityTools.Transfers.WebApi.Controllers
 
         [HttpPost]
         [Route("Add")]
-        [Authorize]
         public StatusCodeResult Add(Account account)
         {
             this.TransfersContext.Accounts.Add(account);

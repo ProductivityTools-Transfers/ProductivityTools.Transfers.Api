@@ -38,7 +38,6 @@ namespace ProductivityTools.Transfers.Api.Controllers
 
         [HttpPost]
         [Route("Add")]
-        [Authorize]
         public StatusCodeResult Add(Transfer transfer)
         {
             this.TransfersContext.Transfers.Add(transfer);
