@@ -11,7 +11,10 @@ namespace ProductivityTools.Transfers.Database.Objects
     {
         public int? AccountId { get; set; }
         public string Name { get; set; }
-        
+        public decimal Pillow { get; set; }
+        public string Type { get; set; }
+        public string Number { get; set; }
+
         public List<Transfer>? Transfers { get; set; }
     }
 }

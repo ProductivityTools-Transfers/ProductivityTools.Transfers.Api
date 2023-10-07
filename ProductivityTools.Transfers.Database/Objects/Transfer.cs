@@ -9,7 +9,6 @@ namespace ProductivityTools.Transfers.Database.Objects
     public class Transfer
     {
         public int? TransferId { get; set; }
-        public decimal? Pillow { get; set; }
         public int? SourceId { get; set; }
         public Account? Source { get; set; }
         public int? TargetId { get; set; }

@@ -1,13 +1,15 @@
 ﻿CREATE TABLE [dbo].[Account](
 	[AccountId] [int] IDENTITY(1,1) NOT NULL,
 	Name VARCHAR(100),
+	[Pillow] DECIMAL(7,2) NULL,
+	Type VARCHAR(20),
+	Number VARCHAR(24),
 	CONSTRAINT [PK_Account] PRIMARY KEY ([AccountId])
 )
 
 
 CREATE TABLE [dbo].[Transfer](
 	[TransferId] [int] IDENTITY(1,1) NOT NULL,
-	[Pillow] DECIMAL(7,2) NULL,
 	[SourceId] INT,
 	[TargetId] INT,
 	[TransferDay] INT,
