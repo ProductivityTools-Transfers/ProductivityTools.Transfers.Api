@@ -52,7 +52,10 @@ namespace ProductivityTools.Transfers.Database
         {
             modelBuilder.Entity<Transfer>().ToTable("Transfer")
                 .HasKey(x => x.TransferId);
-            modelBuilder.Entity<Transfer>().HasOne(x => x.Target).WithMany(x => x.Transfers).HasForeignKey(x => x.TargetId);
+            modelBuilder.Entity<Account>().HasMany(x => x.TransfersSource).WithOne(x => x.Source).HasForeignKey(x => x.SourceId).HasPrincipalKey(x => x.AccountId);
+            modelBuilder.Entity<Account>().HasMany(x => x.TransfersTarget).WithOne(x => x.Target).HasForeignKey(x => x.TargetId).HasPrincipalKey(x => x.AccountId);
+            //modelBuilder.Entity<Transfer>().HasOne(x => x.Source).WithMany(x => x.Transfers).HasForeignKey(x => x.SourceId).HasPrincipalKey(x => x.AccountId);
+            //modelBuilder.Entity<Transfer>().HasOne(x => x.Target).WithMany(x => x.Transfers).HasForeignKey(x => x.TargetId).HasPrincipalKey(x => x.AccountId);
             modelBuilder.Entity<TransferHistory>().ToTable("TransferHistory")
                 .HasKey(x=>x.TransferHistoryId);
             modelBuilder.Entity<Account>().ToTable("Account")

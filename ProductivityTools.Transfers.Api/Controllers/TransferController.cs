@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using ProductivityTools.Transfers.Database;
 using ProductivityTools.Transfers.Database.Objects;
 
@@ -28,16 +29,19 @@ namespace ProductivityTools.Transfers.Api.Controllers
         }
 
         [HttpPost]
-        [Route("List")]
+        [Route("TransferList")]
         public IEnumerable<Transfer> List(x ob)
         {
-            var lastElement = this.TransfersContext.Transfers.ToList();
+            var lastElement = this.TransfersContext.Transfers
+                .Include(x=>x.Source)
+                .Include(x=>x.Target)
+                .ToList();
             return lastElement;
         }
 
 
         [HttpPost]
-        [Route("Add")]
+        [Route("TransferAdd")]
         public StatusCodeResult Add(Transfer transfer)
         {
             this.TransfersContext.Transfers.Add(transfer);

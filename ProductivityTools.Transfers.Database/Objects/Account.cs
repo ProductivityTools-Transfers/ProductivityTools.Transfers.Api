@@ -15,6 +15,9 @@ namespace ProductivityTools.Transfers.Database.Objects
         public string Type { get; set; }
         public string Number { get; set; }
 
-        public List<Transfer>? Transfers { get; set; }
+        [JsonIgnore]
+        public ICollection<Transfer>? TransfersSource { get; set; }
+        [JsonIgnore]
+        public ICollection<Transfer>? TransfersTarget { get; set; }
     }
 }

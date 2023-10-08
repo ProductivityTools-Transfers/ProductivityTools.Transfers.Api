@@ -17,7 +17,7 @@ namespace ProductivityTools.Transfers.WebApi.Controllers
         }
 
         [HttpPost]
-        [Route("List")]
+        [Route("AccountList")]
         public IEnumerable<Account> List(object x)
         {
             var accounts = this.TransfersContext.Accounts.ToList();
@@ -26,7 +26,7 @@ namespace ProductivityTools.Transfers.WebApi.Controllers
 
 
         [HttpPost]
-        [Route("Add")]
+        [Route("AccountAdd")]
         public StatusCodeResult Add(Account account)
         {
             this.TransfersContext.Accounts.Add(account);
