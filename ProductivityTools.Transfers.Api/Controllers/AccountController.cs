@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using ProductivityTools.Transfers.Database;
 using ProductivityTools.Transfers.Database.Objects;
+using ProductivityTools.Transfers.WebApi.Requests;
 
 namespace ProductivityTools.Transfers.WebApi.Controllers
 {
@@ -23,6 +24,16 @@ namespace ProductivityTools.Transfers.WebApi.Controllers
             var accounts = this.TransfersContext.Accounts.ToList();
             return accounts;
         }
+
+        [HttpPost]
+        [Route("AccountItem")]
+        public Account? Item(AccountItem x)
+        {
+            var account = this.TransfersContext.Accounts
+                .SingleOrDefault(x => x.AccountId == x.AccountId);
+            return account;
+        }
+
 
 
         [HttpPost]

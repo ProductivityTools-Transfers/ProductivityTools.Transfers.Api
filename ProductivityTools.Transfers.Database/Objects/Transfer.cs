@@ -13,6 +13,7 @@ namespace ProductivityTools.Transfers.Database.Objects
         public Account? Source { get; set; }
         public int? TargetId { get; set; }
         public Account? Target { get; set; }
-        public decimal? Value { get; set; }
+        public decimal Value { get; set; }
+        public int? TransferDay { get; set; }
     }
 }
