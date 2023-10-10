@@ -13,7 +13,7 @@ namespace ProductivityTools.Transfers.Database.Objects
         public string Name { get; set; }
         public decimal Pillow { get; set; }
         public string Type { get; set; }
-        public string Number { get; set; }
+        public string? Number { get; set; }
 
         [JsonIgnore]
         public ICollection<Transfer>? TransfersSource { get; set; }

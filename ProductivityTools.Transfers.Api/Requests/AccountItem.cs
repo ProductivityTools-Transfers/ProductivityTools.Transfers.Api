@@ -2,6 +2,6 @@
 {
     public class TransferItem
     {
-        public int TransferId { get; set; }
+        public int? TransferId { get; set; }
     }
 }

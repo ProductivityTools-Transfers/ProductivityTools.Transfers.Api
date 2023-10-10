@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using ProductivityTools.Transfers.Database;
 using ProductivityTools.Transfers.Database.Objects;
 using ProductivityTools.Transfers.WebApi.Requests;
+using System.Security.Cryptography.Xml;
 
 namespace ProductivityTools.Transfers.WebApi.Controllers
 {
@@ -27,20 +28,27 @@ namespace ProductivityTools.Transfers.WebApi.Controllers
 
         [HttpPost]
         [Route("AccountItem")]
-        public Account? Item(AccountItem x)
+        public Account? Item(AccountItem input)
         {
             var account = this.TransfersContext.Accounts
-                .SingleOrDefault(x => x.AccountId == x.AccountId);
+                .SingleOrDefault(x => x.AccountId ==input.AccountId);
             return account;
         }
 
 
 
         [HttpPost]
-        [Route("AccountAdd")]
-        public StatusCodeResult Add(Account account)
+        [Route("AccountEdit")]
+        public StatusCodeResult Edit(Account account)
         {
-            this.TransfersContext.Accounts.Add(account);
+            if (account.AccountId== null)
+            {
+                this.TransfersContext.Accounts.Add(account);
+            }
+            else
+            {
+                this.TransfersContext.Accounts.Update(account);
+            }
             this.TransfersContext.SaveChanges();
             return Ok();
         }

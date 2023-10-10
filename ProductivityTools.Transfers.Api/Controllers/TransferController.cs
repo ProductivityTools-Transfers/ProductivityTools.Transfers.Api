@@ -43,13 +43,27 @@ namespace ProductivityTools.Transfers.Api.Controllers
 
         [HttpPost]
         [Route("TransferList")]
-        public IEnumerable<Transfer> List(x ob)
+        public IEnumerable<Transfer> List(TransferItem source)
         {
-            var lastElement = this.TransfersContext.Transfers
-                .Include(x => x.Source)
-                .Include(x => x.Target)
-                .ToList();
-            return lastElement;
+            if (source == null || source.TransferId == null)
+            {
+                var lastElement = this.TransfersContext.Transfers
+                    .Include(x => x.Source)
+                    .Include(x => x.Target)
+                    .Where(x => x.Source.Type == "Root")
+                    .ToList();
+                return lastElement;
+            }
+            else
+            {
+                var lastElement = this.TransfersContext.Transfers
+                    .Where(x => x.TransferId == source.TransferId)
+                    .Include(x => x.Source)
+                    .Include(x => x.Target)
+                    .ToList();
+                return lastElement;
+            }
+
         }
 
 
