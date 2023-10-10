@@ -4,6 +4,7 @@ using Microsoft.IdentityModel.Logging;
 using ProductivityTools.Transfers.Database;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using ProductivityTools.Transfers.WebApi.Services;
 
 string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 var builder = WebApplication.CreateBuilder(args);
@@ -41,7 +42,7 @@ builder.Services.AddCors(options =>
 });
 
 
-
+builder.Services.AddScoped<TransferService>();
 builder.Services.AddControllers();
 builder.Services.ConfigureServicesDatabase();
 

@@ -4,6 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using ProductivityTools.Transfers.Database;
 using ProductivityTools.Transfers.Database.Objects;
 using ProductivityTools.Transfers.WebApi.Requests;
+using ProductivityTools.Transfers.WebApi.Responses;
+using ProductivityTools.Transfers.WebApi.Services;
 
 namespace ProductivityTools.Transfers.Api.Controllers
 {
@@ -12,10 +14,12 @@ namespace ProductivityTools.Transfers.Api.Controllers
     public class TransferController : Controller
     {
         TransfersContext TransfersContext;
+        TransferService TransferService;
 
-        public TransferController(TransfersContext transfersContext)
+        public TransferController(TransfersContext transfersContext, TransferService transferService)
         {
             this.TransfersContext = transfersContext;
+            this.TransferService = transferService;
         }
 
         [HttpGet]
@@ -43,27 +47,10 @@ namespace ProductivityTools.Transfers.Api.Controllers
 
         [HttpPost]
         [Route("TransferList")]
-        public IEnumerable<Transfer> List(TransferItem source)
+        public IEnumerable<TransferResponse> List(TransferItem source)
         {
-            if (source == null || source.TransferId == null)
-            {
-                var lastElement = this.TransfersContext.Transfers
-                    .Include(x => x.Source)
-                    .Include(x => x.Target)
-                    .Where(x => x.Source.Type == "Root")
-                    .ToList();
-                return lastElement;
-            }
-            else
-            {
-                var lastElement = this.TransfersContext.Transfers
-                    .Where(x => x.TransferId == source.TransferId)
-                    .Include(x => x.Source)
-                    .Include(x => x.Target)
-                    .ToList();
-                return lastElement;
-            }
-
+            var r=this.TransferService.GetTransferList(source.TransferId);
+            return r;
         }
 
 

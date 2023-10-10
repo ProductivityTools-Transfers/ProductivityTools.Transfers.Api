@@ -27,22 +27,22 @@ namespace ProductivityTools.Transfers.Database
             this.configuration = configuration;
         }
 
-        //private ILoggerFactory GetLoggerFactory()
-        //{
-        //    IServiceCollection serviceCollection = new ServiceCollection();
-        //    serviceCollection.AddLogging(builder =>
-        //           builder.AddConsole()
-        //                  .AddFilter(DbLoggerCategory.Database.Command.Name,
-        //                             LogLevel.Information));
-        //    return serviceCollection.BuildServiceProvider()
-        //            .GetService<ILoggerFactory>();
-        //}
+        private ILoggerFactory GetLoggerFactory()
+        {
+            IServiceCollection serviceCollection = new ServiceCollection();
+            serviceCollection.AddLogging(builder =>
+                   builder.AddConsole()
+                          .AddFilter(DbLoggerCategory.Database.Command.Name,
+                                     LogLevel.Information));
+            return serviceCollection.BuildServiceProvider()
+                    .GetService<ILoggerFactory>();
+        }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
                 optionsBuilder.UseSqlServer(configuration.GetConnectionString("PTTransfers"));
-               // optionsBuilder.UseLoggerFactory(GetLoggerFactory());
+                optionsBuilder.UseLoggerFactory(GetLoggerFactory());
                 optionsBuilder.EnableSensitiveDataLogging();
                 base.OnConfiguring(optionsBuilder);
             }
