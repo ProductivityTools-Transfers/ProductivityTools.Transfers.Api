@@ -48,7 +48,7 @@ namespace ProductivityTools.Transfers.WebApi.Services
             else
             {
                 transferList = this.TransfersContext.Transfers
-                    .Where(x => x.TransferId == sourceTransferId)
+                    .Where(x => x.SourceId == sourceTransferId)
                     .Include(x => x.Source)
                     .Include(x => x.Target)
                     .Select(x => new TransferResponse(x))
