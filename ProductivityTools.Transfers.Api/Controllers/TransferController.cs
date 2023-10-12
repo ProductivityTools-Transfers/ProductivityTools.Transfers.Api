@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ProductivityTools.Transfers.Database;
 using ProductivityTools.Transfers.Database.Objects;
+using ProductivityTools.Transfers.WebApi;
 using ProductivityTools.Transfers.WebApi.Requests;
 using ProductivityTools.Transfers.WebApi.Responses;
 using ProductivityTools.Transfers.WebApi.Services;
@@ -47,6 +48,8 @@ namespace ProductivityTools.Transfers.Api.Controllers
 
         [HttpPost]
         [Route("TransferList")]
+        [Authorize]
+        [AuthenticatedUsers]
         public IEnumerable<TransferResponse> List(TransferItem source)
         {
             var r=this.TransferService.GetTransferList(source.TransferId);

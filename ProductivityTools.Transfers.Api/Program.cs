@@ -47,12 +47,13 @@ builder.Services.AddControllers();
 builder.Services.ConfigureServicesDatabase();
 
 var app = builder.Build();
-
+app.UseRouting();//not sure if required
 app.UseCors(MyAllowSpecificOrigins);
-app.UseHttpsRedirection();
-
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.UseHttpsRedirection();
+
 
 app.MapControllers();
 
