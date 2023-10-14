@@ -7,6 +7,7 @@ var connectionString =
     ?? "Server=localhost\\SQL2019; Database=PTTransfers; Trusted_connection=true; TrustServerCertificate=True;";
 EnsureDatabase.For.SqlDatabase(connectionString);
 Console.WriteLine(connectionString);
+Console.WriteLine("pawel");
 
 var upgrader =
     DeployChanges.To
