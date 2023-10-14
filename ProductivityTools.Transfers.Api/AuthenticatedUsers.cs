@@ -14,7 +14,7 @@ namespace ProductivityTools.Transfers.WebApi
             IEnumerable<Claim> claims = identity.Claims;
             var email = claims.First(x => x.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress").Value;
 
-            if (email == "pwujczdyk@gmail.com" || email == "pwujczyk@google.com" || email == "malgorzata.wujczyk@gmail.com")
+            if (email == "pwujczyk@gmail.com" || email == "pwujczyk@google.com" || email == "malgorzata.wujczyk@gmail.com")
             {
                 base.OnActionExecuting(context);
             }
