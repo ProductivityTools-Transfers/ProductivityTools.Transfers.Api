@@ -72,6 +72,7 @@ namespace ProductivityTools.Transfers.Api.Controllers
                 update.SourceId=transfer.SourceId;  
                 update.TargetId=transfer.TargetId;
                 update.Value=transfer.Value;
+                update.ValueComment = transfer.ValueComment;
             }
             this.TransfersContext.SaveChanges();
             return Ok();

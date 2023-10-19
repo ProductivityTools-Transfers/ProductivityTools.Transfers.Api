@@ -13,6 +13,7 @@ namespace ProductivityTools.Transfers.WebApi.Responses
             this.Target = transfer.Target;
             this.Value = transfer.Value;
             this.TransferDay = transfer.TransferDay;
+            this.ValueComment = transfer.ValueComment;
         }
 
         public int ChildTransfers { get; set; }
