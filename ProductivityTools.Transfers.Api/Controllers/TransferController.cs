@@ -67,7 +67,11 @@ namespace ProductivityTools.Transfers.Api.Controllers
             }
             else
             {
-                this.TransfersContext.Transfers.Update(transfer);
+                var update=this.TransfersContext.Transfers.Single(x=>x.TransferId== transfer.TransferId);
+                update.TransferDay = transfer.TransferDay;
+                update.SourceId=transfer.SourceId;  
+                update.TargetId=transfer.TargetId;
+                update.Value=transfer.Value;
             }
             this.TransfersContext.SaveChanges();
             return Ok();

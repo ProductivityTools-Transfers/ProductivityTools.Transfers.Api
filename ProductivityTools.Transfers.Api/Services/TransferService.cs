@@ -41,9 +41,9 @@ namespace ProductivityTools.Transfers.WebApi.Services
                 transferList = this.TransfersContext.Transfers
                     .Include(x => x.Source)
                     .Include(x => x.Target)
-                    .Where(x => x.Source.Type == "Root")
+                    .Where(x => x.Source.Type == "Income")
                     .Select(x => new TransferResponse(x))
-                    .ToList();
+                    .ToList().OrderBy(x => x.ChildTransfers).ToList(); ;
             }
             else
             {
@@ -52,13 +52,12 @@ namespace ProductivityTools.Transfers.WebApi.Services
                     .Include(x => x.Source)
                     .Include(x => x.Target)
                     .Select(x => new TransferResponse(x))
-                    .ToList();
+                    .ToList().OrderBy(x => x.ChildTransfers).ToList();
 
             }
 
             foreach (var transfer in transferList)
             {
-
                 transfer.ChildTransfers = GetChildTransfers(transfer.TargetId);
             }
 
