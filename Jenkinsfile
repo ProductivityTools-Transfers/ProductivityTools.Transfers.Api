@@ -49,7 +49,14 @@ pipeline {
                 bat('%windir%\\system32\\inetsrv\\appcmd stop site /site.name:Transfers')
             }
         }
-
+	    stage('Sleep') {
+			steps {
+				script {
+					print('I am sleeping for a while')
+					sleep(30)    
+				}
+			}
+		}
         stage('deleteIisDir') {
             steps {
                 retry(5) {
