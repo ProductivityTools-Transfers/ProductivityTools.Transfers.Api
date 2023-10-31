@@ -21,3 +21,4 @@ Validate of the service can be done with:
 ```http://apitransfers.productivitytools.top:80/Transfer/echo?name=pawel```
 
 ![](Images/2023-10-20-20-37-09.png)
+testwebhook
