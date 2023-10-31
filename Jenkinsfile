@@ -57,6 +57,14 @@ pipeline {
 				}
 			}
 		}
+		stage('deleteIisDirFiles') {
+            steps {
+                retry(5) {
+                    bat('if exist "C:\\Bin\\IIS\\Transfers" RMDIR /Q/S "C:\\Bin\\IIS\\Transfers\*"')
+                }
+
+            }
+        }
         stage('deleteIisDir') {
             steps {
                 retry(5) {
