@@ -27,7 +27,7 @@ namespace ProductivityTools.Transfers.Api.Controllers
         [Route("echo")]
         public string echo(string name)
         {
-            return $"Welcome {name}";
+            return $"Welcome request performed at {DateTime.Now} with param {name} on server {System.Environment.MachineName} to Application Transfers";
         }
         public class x
         {
