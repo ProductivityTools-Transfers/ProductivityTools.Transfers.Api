@@ -60,7 +60,7 @@ pipeline {
 		stage('deleteIisDirFiles') {
             steps {
                 retry(5) {
-                    bat('if exist "C:\\Bin\\IIS\\Transfers" RM "C:\\Bin\\IIS\\Transfers\\*"')
+                    bat('if exist "C:\\Bin\\IIS\\Transfers" del "C:\\Bin\\IIS\\Transfers\\*"')
                 }
 
             }
