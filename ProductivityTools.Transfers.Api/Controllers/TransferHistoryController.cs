@@ -38,6 +38,8 @@ namespace ProductivityTools.Transfers.Api.Controllers
         [HttpPost]
         [Route("Add")]
         [Authorize]
+        //I cannot find any reference for this method
+        //I think I wrote it but not use with the current approach (web) this method does not make sense
         public StatusCodeResult Add(TransferHistory transfer)
         {
             var recordWithTheSameDateExists = this.TransfersContext.TransfersHistory.FirstOrDefault(x => x.Date == transfer.Date && x.Category==transfer.Category && x.Name==transfer.Name);
