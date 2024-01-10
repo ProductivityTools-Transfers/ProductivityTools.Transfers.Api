@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using ProductivityTools.Transfers.Database;
 using ProductivityTools.Transfers.Database.Objects;
 
@@ -53,6 +54,20 @@ namespace ProductivityTools.Transfers.Api.Controllers
 
             return Ok();
         }
+
+
+        [HttpPost]
+        [Route("AddSnapshot")]
+        [Authorize]
+        //I cannot find any reference for this method
+        //I think I wrote it but not use with the current approach (web) this method does not make sense
+        public StatusCodeResult AddSnapshot(object nothing)
+        {
+            this.TransfersContext.TransfersHistory.FromSqlRaw("Exec TodayTransferHistory");
+            return Ok();
+        }
+
+
 
 
     }
