@@ -31,8 +31,8 @@ namespace ProductivityTools.Transfers.Api.Controllers
         [Route("List")]
         public IEnumerable<TransferHistory> List(x ob)
         {
-            var lastElement = this.TransfersContext.TransfersHistory.OrderBy(x => x.Date).Single();
-            var list = this.TransfersContext.TransfersHistory.Where(x => x.Name == x.Name.ToString() && x.Date == lastElement.Date);
+            //var lastElement = this.TransfersContext.TransfersHistory.OrderBy(x => x.Date).Single();
+            var list = this.TransfersContext.TransfersHistory.ToList();
             return list;
         }
 
@@ -43,7 +43,7 @@ namespace ProductivityTools.Transfers.Api.Controllers
         //I think I wrote it but not use with the current approach (web) this method does not make sense
         public StatusCodeResult Add(TransferHistory transfer)
         {
-            var recordWithTheSameDateExists = this.TransfersContext.TransfersHistory.FirstOrDefault(x => x.Date == transfer.Date && x.Category==transfer.Category && x.Name==transfer.Name);
+            var recordWithTheSameDateExists = this.TransfersContext.TransfersHistory.FirstOrDefault(x => x.Date == transfer.Date && x.Source==transfer.Source && x.Target==transfer.Target);
             if (recordWithTheSameDateExists != null)
             {
                 this.TransfersContext.TransfersHistory.Remove(recordWithTheSameDateExists);

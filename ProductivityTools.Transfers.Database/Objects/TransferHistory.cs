@@ -9,9 +9,10 @@ namespace ProductivityTools.Transfers.Database.Objects
     public class TransferHistory
     {
         public int TransferHistoryId { get; set; }
-        public DateTime Date { get; set; }
-        public string Category { get; set; }
-        public string Name { get; set; }
-        public decimal Value { get; set; }
+        public DateTime? Date { get; set; }
+        public string? Source { get; set; }
+        public string? Target { get; set; }
+        public decimal? Value { get; set; }
+        public string? ValueComment { get; set; }
     }
 }

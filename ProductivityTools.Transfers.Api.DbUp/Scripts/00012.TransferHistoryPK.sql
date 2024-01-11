@@ -1,0 +1,1 @@
+﻿EXEC sp_rename 'dbo.TransferHistory.TransferId', 'TransferHistoryId', 'COLUMN';
