@@ -29,6 +29,8 @@ namespace ProductivityTools.Transfers.Api.Controllers
         }
         [HttpPost]
         [Route("List")]
+        [Authorize]
+
         public IEnumerable<TransferHistory> List(x ob)
         {
             //var lastElement = this.TransfersContext.TransfersHistory.OrderBy(x => x.Date).Single();
@@ -63,14 +65,8 @@ namespace ProductivityTools.Transfers.Api.Controllers
         //I think I wrote it but not use with the current approach (web) this method does not make sense
         public StatusCodeResult AddSnapshot(object nothing)
         {
-            this.TransfersContext.TransfersHistory.FromSqlRaw("Exec TodayTransferHistory");
+            var r=this.TransfersContext.Database.ExecuteSqlRaw("EXEC [dbo].[TodayTransferHistory]");
             return Ok();
         }
-
-
-
-
     }
-
-
 }

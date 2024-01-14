@@ -36,6 +36,7 @@ namespace ProductivityTools.Transfers.Api.Controllers
 
         [HttpPost]
         [Route("TransferItem")]
+        [Authorize]
         public Transfer Item(TransferItem transferItem)
         {
             var lastElement = this.TransfersContext.Transfers
@@ -59,6 +60,7 @@ namespace ProductivityTools.Transfers.Api.Controllers
 
         [HttpPost]
         [Route("TransferEdit")]
+        [Authorize]
         public StatusCodeResult Add(Transfer transfer)
         {
             if (transfer.TransferId == null)
