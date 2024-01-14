@@ -57,6 +57,16 @@ namespace ProductivityTools.Transfers.Api.Controllers
             return r;
         }
 
+        [HttpPost]
+        [Route("TransferDelete")]
+        [Authorize]
+        [AuthenticatedUsers]
+        public StatusCodeResult Delete(TransferDelete source)
+        {
+            this.TransferService.DeleteTransfer(source.TransferId);
+            return Ok();
+        }
+
 
         [HttpPost]
         [Route("TransferEdit")]

@@ -29,7 +29,6 @@ namespace ProductivityTools.Transfers.WebApi.Controllers
         [HttpPost]
         [Route("AccountItem")]
         [Authorize]
-
         public Account? Item(AccountItem input)
         {
             var account = this.TransfersContext.Accounts

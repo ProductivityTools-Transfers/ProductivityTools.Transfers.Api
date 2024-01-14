@@ -33,6 +33,13 @@ namespace ProductivityTools.Transfers.WebApi.Services
             return sum;
         }
 
+        public void DeleteTransfer(int transferId)
+        {
+            var transfer=this.TransfersContext.Transfers.Single(x => x.TransferId == transferId);
+            this.TransfersContext.Transfers.Remove(transfer);
+            this.TransfersContext.SaveChanges();
+        }
+
         public List<TransferResponse> GetTransferList(int? sourceTransferId)
         {
             List<TransferResponse> transferList = null;

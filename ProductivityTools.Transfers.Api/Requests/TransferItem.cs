@@ -1,7 +1,7 @@
 ﻿namespace ProductivityTools.Transfers.WebApi.Requests
 {
-    public class AccountItem
+    public class TransferItem
     {
-        public int AccountId { get; set; }
+        public int? TransferId { get; set; }
     }
 }
