@@ -16,5 +16,6 @@ namespace ProductivityTools.Transfers.Database.Objects
         public decimal Value { get; set; }
         public int? TransferDay { get; set; }
         public string? ValueComment { get; set; }
+        public string? TargetTag { get; set; }
     }
 }

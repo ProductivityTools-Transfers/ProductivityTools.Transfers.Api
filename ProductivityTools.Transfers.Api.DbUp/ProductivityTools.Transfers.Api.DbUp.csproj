@@ -19,10 +19,12 @@
     <None Remove="Scripts\00009.TransferHistorySnapshot.sql" />
     <None Remove="Scripts\00011.TransferHistorySnapshotProcedure.sql" />
     <None Remove="Scripts\00012.TransferHistoryPK.sql" />
+    <None Remove="Scripts\00013.TargetTag.sql" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="Scripts\00001.Dabase.sql" />
+    <EmbeddedResource Include="Scripts\00013.TargetTag.sql" />
     <EmbeddedResource Include="Scripts\00009.TransferHistorySnapshot.sql" />
     <EmbeddedResource Include="Scripts\00008.HistoryComent.sql" />
     <EmbeddedResource Include="Scripts\00007.HistorySchema.sql" />
