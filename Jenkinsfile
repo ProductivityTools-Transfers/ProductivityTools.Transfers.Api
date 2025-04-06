@@ -15,24 +15,24 @@ pipeline {
                 deleteDir()
             }
         }
-        stage('clone') {
+        stage('Git Clone') {
             steps {
                 // Get some code from a GitHub repository
                 git branch: 'main',
                 url: 'https://github.com/ProductivityTools-Transfers/ProductivityTools.Transfers.Api'
             }
         }
-        stage('build') {
+        stage('Build solution') {
             steps {
                 bat(script: "dotnet publish ProductivityTools.Transfers.Api.sln -c Release", returnStdout: true)
             }
         }
-        stage('deleteDbMigratorDir') {
+        stage('Delete databse migration directory') {
             steps {
                 bat('if exist "C:\\Bin\\DbMigration\\Transfers.Api" RMDIR /Q/S "C:\\Bin\\DbMigration\\Transfers.Api"')
             }
         }
-        stage('Copy Database Migration Files') {
+        stage('Copy database migration files') {
             steps {
                 bat('xcopy "ProductivityTools.Transfers.Api.DbUp\\bin\\Release\\net6.0\\publish\\" "C:\\Bin\\DbMigration\\Transfers.Api\\" /O /X /E /H /K')
             }
@@ -72,7 +72,7 @@ pipeline {
 
                     }
                 }
-                Create "PTTransfers" "*:8001"  "C:\\Bin\\IIS\\PTTransfers\\"                
+                Create "PTTransfers" "*:8003"  "C:\\Bin\\IIS\\PTTransfers\\"                
                 ''')
             }
         }
