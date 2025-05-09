@@ -38,14 +38,14 @@ pipeline {
             }
         }
 
-        stage('runDbMigratorFiles') {
+        stage('Run databse migration files') {
             steps {
                 bat('C:\\Bin\\DbMigration\\Transfers.Api\\ProductivityTools.Transfers.Api.DbUp.exe')
             }
         }
 
 
-        stage('create iis page') {
+        stage('Create page on the IIS') {
             steps {
                 powershell('''
                 function CheckIfExist($Name){
@@ -72,12 +72,12 @@ pipeline {
 
                     }
                 }
-                Create "PTTransfers" "*:8003"  "C:\\Bin\\IIS\\PTTransfers\\"                
+                Create "PTTransfers" "*:8003"  "C:\\Bin\\IIS\\PTTransfers"                
                 ''')
             }
         }
 
-        stage('stopMeetingsOnIis') {
+        stage('Stop page on the IIS') {
             steps {
                 bat('%windir%\\system32\\inetsrv\\appcmd stop site /site.name:PTTransfers')
             }
@@ -104,9 +104,9 @@ pipeline {
             }
         }
 	  
-        stage('copyIisFiles') {
+        stage('Copy web page to the IIS Bin directory') {
             steps {         
-                bat('xcopy "ProductivityTools.Transfers.Api\\bin\\Release\\net6.0\\publish" "C:\\Bin\\IIS\\PTTransfers\\" /O /X /E /H /K')
+                bat('xcopy "ProductivityTools.Transfers.Api\\bin\\Release\\net9.0\\publish" "C:\\Bin\\IIS\\PTTransfers\\" /O /X /E /H /K')
             }
         }
 
