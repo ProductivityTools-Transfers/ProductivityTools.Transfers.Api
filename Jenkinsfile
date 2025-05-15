@@ -116,9 +116,9 @@ pipeline {
             }
         }
 
-      stage('Create Login PTFeedback on SQL2022') {
+      stage('Create Login PTTransfers on SQL2022') {
              steps {
-                 bat('sqlcmd -S ".\\SQL2022" -q "CREATE LOGIN [IIS APPPOOL\\PTFeedback] FROM WINDOWS;"')
+                 bat('sqlcmd -S ".\\SQL2022" -q "CREATE LOGIN [IIS APPPOOL\\PTTransfers] FROM WINDOWS WITH DEFAULT_DATABASE=[PTTransfers];"')
              }
         }
 
