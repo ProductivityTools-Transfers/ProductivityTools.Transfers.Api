@@ -122,6 +122,12 @@ pipeline {
              }
         }
 
+              stage('Create User PTTransfers on SQL2022') {
+             steps {
+                 bat('sqlcmd -S ".\\SQL2022" -q " USE PTTransfers;  CREATE USER [IIS APPPOOL\\PTTransfers]  FOR LOGIN [IIS APPPOOL\\PTTransfers];"')
+             }
+        }
+
         stage('byebye') {
             steps {
                 // Get some code from a GitHub repository
