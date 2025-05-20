@@ -130,7 +130,7 @@ pipeline {
 
         stage('Give DBOwner permissions on SQL2022') {
              steps {
-                 bat('sqlcmd -S ".\\SQL2022" -q "USE PTTransfers;  EXEC sp_addrolemember "db_owner", "[IIS APPPOOL\\PTTransfers]";"')
+                 bat('sqlcmd -S ".\\SQL2022" -q "USE PTTransfers;  EXEC sp_addrolemember \'db_owner\', \'[IIS APPPOOL\\PTTransfers]\';"')
              }
         }
 
