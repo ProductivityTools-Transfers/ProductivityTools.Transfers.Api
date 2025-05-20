@@ -122,9 +122,15 @@ pipeline {
              }
         }
 
-              stage('Create User PTTransfers on SQL2022') {
+        stage('Create User PTTransfers on SQL2022') {
              steps {
                  bat('sqlcmd -S ".\\SQL2022" -q " USE PTTransfers;  CREATE USER [IIS APPPOOL\\PTTransfers]  FOR LOGIN [IIS APPPOOL\\PTTransfers];"')
+             }
+        }
+
+        stage('Give DBOwner permissions on SQL2022') {
+             steps {
+                 bat('sqlcmd -S ".\\SQL2022" -q " USE PTTransfers;  EXEC sp_addrolemember N'db_owner', N'[IIS APPPOOL\\PTTransfers]';"')
              }
         }
 
