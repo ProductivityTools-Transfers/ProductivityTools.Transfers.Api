@@ -10,7 +10,12 @@ pipeline {
                 echo 'hello'
             }
         }
-        stage('deleteWorkspace') {
+        stage('Print workpalce Path'){
+			steps{
+				echo "${env.WORKSPACE}"
+			}
+		}
+        stage('Delete Workspace') {
             steps {
                 deleteDir()
             }
@@ -110,7 +115,7 @@ pipeline {
             }
         }
 
-        stage('startMeetingsOnIis') {
+        stage('Start website on IIS') {
             steps {
                 bat('%windir%\\system32\\inetsrv\\appcmd start site /site.name:PTTransfers')
             }
