@@ -14,7 +14,7 @@ var builder = WebApplication.CreateBuilder(args);
 string masterconfpath = Environment.GetEnvironmentVariable("MasterConfigurationPath");
 FirebaseApp.Create(new AppOptions()
 {
-    Credential = GoogleCredential.FromFile($"{masterconfpath}\\ProductivityTools.ProjectsWeb.Firebase.ServiceAccount.json"),
+    Credential = GoogleCredential.FromFile($"{masterconfpath}\\ProductivityTools.Transfers.ServiceAccount.json"),
 });
 IdentityModelEventSource.ShowPII = true;
 builder.Services
@@ -27,7 +27,7 @@ builder.Services
          ValidateIssuer = true,
          ValidIssuer = "https://securetoken.google.com/ptprojectsweb",
          ValidateAudience = true,
-         ValidAudience = "pttransfersprod",
+         ValidAudience = "ptprojectsweb",
          ValidateLifetime = true
      };
  });
