@@ -21,11 +21,11 @@ builder.Services
  .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
  .AddJwtBearer(options =>
  {
-     options.Authority = "https://securetoken.google.com/pttransfersprod";
+     options.Authority = "https://securetoken.google.com/ptprojectsweb";
      options.TokenValidationParameters = new TokenValidationParameters
      {
          ValidateIssuer = true,
-         ValidIssuer = "https://securetoken.google.com/pttransfersprod",
+         ValidIssuer = "https://securetoken.google.com/ptprojectsweb",
          ValidateAudience = true,
          ValidAudience = "pttransfersprod",
          ValidateLifetime = true
