@@ -12,10 +12,12 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 string masterconfpath = Environment.GetEnvironmentVariable("MasterConfigurationPath");
-FirebaseApp.Create(new AppOptions()
-{
-    Credential = GoogleCredential.FromFile($"{masterconfpath}\\ProductivityTools.Transfers.ServiceAccount.json"),
-});
+//I am not sure if I need it.
+//FirebaseApp.Create(new AppOptions()
+//{
+//    //Credential = GoogleCredential.FromFile($"{masterconfpath}\\ProductivityTools.Transfers.ServiceAccount.json"),
+//    Credential = GoogleCredential.FromFile($"{masterconfpath}\\ProductivityTools.ProjectsWeb.Firebase.ServiceAccount.json.json"),
+//});
 IdentityModelEventSource.ShowPII = true;
 builder.Services
  .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
