@@ -1,0 +1,114 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: windows-latest # Consider using a self-hosted runner if this requires a specific local environment (IIS, SQL Server).
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.0.x'
+
+      - name: Build solution
+        run: dotnet publish ProductivityTools.Transfers.Api.sln -c Release
+
+      - name: Delete database migration directory
+        shell: cmd
+        run: |
+          if exist "C:\Bin\DbMigration\Transfers.Api" RMDIR /Q/S "C:\Bin\DbMigration\Transfers.Api"
+
+      - name: Copy database migration files
+        shell: cmd
+        run: |
+          xcopy "ProductivityTools.Transfers.Api.DbUp\bin\Release\net9.0\publish\" "C:\Bin\DbMigration\Transfers.Api\" /O /X /E /H /K
+
+      - name: Run database migration files
+        shell: cmd
+        run: |
+          C:\Bin\DbMigration\Transfers.Api\ProductivityTools.Transfers.Api.DbUp.exe
+
+      - name: Create page on the IIS
+        shell: powershell
+        run: |
+          function CheckIfExist($Name){
+              cd $env:SystemRoot\system32\inetsrv
+              $exists = (.\appcmd.exe list sites /name:$Name) -ne $null
+              Write-Host $exists
+              return  $exists
+          }
+          
+          function Create($Name,$HttpbBnding,$PhysicalPath){
+              $exists=CheckIfExist $Name
+              if ($exists){
+                  write-host "Web page already existing"
+              }
+              else
+              {
+                  write-host "Creating app pool"
+                  .\appcmd.exe add apppool /name:$Name /managedRuntimeVersion:"v4.0" /managedPipelineMode:"Integrated"
+                  write-host "Creating webage"
+                  .\appcmd.exe add site /name:$Name /bindings:http://$HttpbBnding /physicalpath:$PhysicalPath
+                  write-host "assign app pool to the website"
+                  .\appcmd.exe set app "$Name/" /applicationPool:"$Name"
+              }
+          }
+          Create "PTTransfers" "*:8003"  "C:\Bin\IIS\PTTransfers"
+
+      - name: Stop page on the IIS
+        shell: cmd
+        run: |
+          %windir%\system32\inetsrv\appcmd stop site /site.name:PTTransfers
+
+      - name: Delete PTTransfers IIS directory
+        shell: powershell
+        run: |
+          if ( Test-Path "C:\Bin\IIS\PTTransfers")
+          {
+              while($true) {
+                  if ( (Remove-Item "C:\Bin\IIS\PTTransfers" -Recurse *>&1) -ne $null)
+                  {  
+                      write-output "removing failed we should wait"
+                  }
+                  else 
+                  {
+                      break 
+                  } 
+              }
+          }
+
+      - name: Copy web page to the IIS Bin directory
+        shell: cmd
+        run: |
+          xcopy "ProductivityTools.Transfers.Api\bin\Release\net9.0\publish" "C:\Bin\IIS\PTTransfers\" /O /X /E /H /K
+
+      - name: Start website on IIS
+        shell: cmd
+        run: |
+          %windir%\system32\inetsrv\appcmd start site /site.name:PTTransfers
+
+      - name: Create Login PTTransfers on SQL2022
+        shell: cmd
+        run: |
+          sqlcmd -S ".\SQL2022" -q "CREATE LOGIN [IIS APPPOOL\PTTransfers] FROM WINDOWS WITH DEFAULT_DATABASE=[PTTransfers];"
+
+      - name: Create User PTTransfers on SQL2022
+        shell: cmd
+        run: |
+          sqlcmd -S ".\SQL2022" -q " USE PTTransfers;  CREATE USER [IIS APPPOOL\PTTransfers]  FOR LOGIN [IIS APPPOOL\PTTransfers];"
+
+      - name: Give DBOwner permissions on SQL2022
+        shell: cmd
+        run: |
+          sqlcmd -S ".\SQL2022" -q "USE PTTransfers;  ALTER ROLE [db_owner] ADD MEMBER [IIS APPPOOL\PTTransfers];"
+
+      # Note: Email notification from the post-always block in Jenkinsfile is not directly translated
+      # as it requires SMTP configuration. You can use actions like `dawidd6/action-send-mail` if needed.
