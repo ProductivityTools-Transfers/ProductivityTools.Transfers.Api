@@ -7,7 +7,7 @@ on:
 
 jobs:
   build-and-deploy:
-    runs-on: windows-latest # Consider using a self-hosted runner if this requires a specific local environment (IIS, SQL Server).
+    runs-on: self-hosted # Consider using a self-hosted runner if this requires a specific local environment (IIS, SQL Server).
 
     steps:
       - name: Checkout code
