@@ -1,10 +1,15 @@
 ﻿using DbUp;
 using System.Reflection;
+using Microsoft.Extensions.Configuration;
+using ProductivityTools.MasterConfiguration;
 
+IConfigurationRoot configuration =
+                new ConfigurationBuilder()
+                .AddMasterConfiguration(configName: "ProductivityTools.Transfers.WebApi.json", force: true)
+                .Build();
 
-var connectionString =
-    args.FirstOrDefault()
-    ?? "Server=localhost\\SQL2022; Database=PTTransfers; Trusted_connection=true; TrustServerCertificate=True;";
+var masterConnectionString = configuration["ConnectionString"];
+var connectionString = args.FirstOrDefault() ?? masterConnectionString; 
 EnsureDatabase.For.SqlDatabase(connectionString);
 Console.WriteLine(connectionString);
 Console.WriteLine("pawel");

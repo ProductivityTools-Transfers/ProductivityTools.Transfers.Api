@@ -9,6 +9,7 @@
   <ItemGroup>
     <PackageReference Include="FirebaseAdmin" Version="2.4.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.22" />
+    <PackageReference Include="ProductivityTools.MasterConfiguration" Version="2.0.5" />
   </ItemGroup>
 
   <ItemGroup>

@@ -5,6 +5,8 @@ using ProductivityTools.Transfers.Database;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using ProductivityTools.Transfers.WebApi.Services;
+using Microsoft.EntityFrameworkCore.Diagnostics;
+using ProductivityTools.MasterConfiguration;
 
 string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 var builder = WebApplication.CreateBuilder(args);
@@ -19,6 +21,7 @@ string masterconfpath = Environment.GetEnvironmentVariable("MasterConfigurationP
 //    Credential = GoogleCredential.FromFile($"{masterconfpath}\\ProductivityTools.ProjectsWeb.Firebase.ServiceAccount.json.json"),
 //});
 IdentityModelEventSource.ShowPII = true;
+builder.Configuration.AddMasterConfiguration(force: true);
 builder.Services
  .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
  .AddJwtBearer(options =>
@@ -53,6 +56,7 @@ app.UseRouting();//not sure if required
 app.UseCors(MyAllowSpecificOrigins);
 app.UseAuthentication();
 app.UseAuthorization();
+
 
 app.UseHttpsRedirection();
 
