@@ -21,6 +21,10 @@ jobs:
       - name: Build solution
         run: dotnet publish ProductivityTools.Transfers.Api.sln -c Release
 
+      - name: Diagnostyka zmiennych
+        run: Get-ChildItem env:
+        shell: powershell
+
       - name: Delete database migration directory
         shell: cmd
         run: |
