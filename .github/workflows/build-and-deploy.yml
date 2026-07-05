@@ -90,11 +90,11 @@ jobs:
                   } 
               }
           }
-
-      - name: Copy web page to the IIS Bin directory
-        shell: cmd
+      - name: Copy web page to IIS Bin directory
+        shell: powershell
         run: |
-          xcopy "ProductivityTools.Transfers.Api\bin\Release\net9.0\publish" "C:\Bin\IIS\PTTransfers\" /O /X /E /H /K
+          New-Item -ItemType Directory -Force -Path "C:\Bin\IIS\PTTransfers"
+          Copy-Item -Path "ProductivityTools.Transfers.Api\bin\Release\net9.0\publish\*" -Destination "C:\Bin\IIS\PTTransfers\" -Recurse -Force
 
       - name: Start website on IIS
         shell: cmd
