@@ -23,7 +23,8 @@ jobs:
 
       - name: Diagnostyka zmiennych
         shell: powershell
-        run: Get-ChildItem env:
+        run: | 
+          Get-ChildItem env:
 
       - name: Delete database migration directory
         shell: cmd
