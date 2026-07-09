@@ -42,7 +42,14 @@ builder.Services.AddCors(options =>
     options.AddPolicy(MyAllowSpecificOrigins,
     builder =>
     {
-        builder.WithOrigins("http://localhost:3000", "https://localhost:3000", "https://transfersweb.z16.web.core.windows.net", "https://ptservicestatus-309299231472.us-central1.run.app", "https://pt-transfers.web.app", "https://transfers.productivitytools.top").AllowAnyMethod().AllowAnyHeader();
+        builder.WithOrigins("http://localhost:3000", 
+        "https://localhost:3000", 
+        "https://transfersweb.z16.web.core.windows.net", 
+        "https://ptservicestatus-309299231472.us-central1.run.app", 
+        "https://pt-transfers.web.app", 
+        "https://transfers.productivitytools.top",
+        "https://pt-service-status-93484780890.us-central1.run.app",
+        "https://service-status.productivitytools.top").AllowAnyMethod().AllowAnyHeader();
     });
 });
 
