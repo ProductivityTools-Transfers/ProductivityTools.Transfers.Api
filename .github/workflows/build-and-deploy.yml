@@ -76,7 +76,6 @@ jobs:
               New-NetFirewallRule -DisplayName "PTTransfers 8003" -Direction Inbound -LocalPort 8003 -Protocol TCP -Action Allow
           }
 
-
       - name: Stop page on the IIS
         shell: cmd
         run: |
@@ -98,6 +97,7 @@ jobs:
                   } 
               }
           }
+
       - name: Copy web page to IIS Bin directory
         shell: powershell
         run: |
