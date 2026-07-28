@@ -68,6 +68,14 @@ jobs:
               }
           }
           Create "PTTransfers" "*:8003"  "C:\Bin\IIS\PTTransfers"
+      
+      - name: Open Firewall Port 8003
+        shell: powershell
+        run: |
+          if (!(Get-NetFirewallRule -DisplayName "PTTransfers 8003" -ErrorAction SilentlyContinue)) {
+              New-NetFirewallRule -DisplayName "PTTransfers 8003" -Direction Inbound -LocalPort 8003 -Protocol TCP -Action Allow
+          }
+
 
       - name: Stop page on the IIS
         shell: cmd
