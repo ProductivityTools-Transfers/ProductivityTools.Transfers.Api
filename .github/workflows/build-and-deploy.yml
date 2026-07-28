@@ -124,5 +124,10 @@ jobs:
         run: |
           sqlcmd -S ".\SQL2022" -q "USE PTTransfers;  ALTER ROLE [db_owner] ADD MEMBER [IIS APPPOOL\PTTransfers];"
 
+      # Jenkins 'byebye'
+      - name: byebyee
+        run: echo "byebye1"
+        shell: cmd
+
       # Note: Email notification from the post-always block in Jenkinsfile is not directly translated
       # as it requires SMTP configuration. You can use actions like `dawidd6/action-send-mail` if needed.
