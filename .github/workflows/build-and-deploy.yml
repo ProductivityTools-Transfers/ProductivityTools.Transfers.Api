@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - main
-
+  workflow_dispatch: # <-- To umożliwia ręczne uruchamianie
 jobs:
   build-and-deploy:
     runs-on: self-hosted # Consider using a self-hosted runner if this requires a specific local environment (IIS, SQL Server).
